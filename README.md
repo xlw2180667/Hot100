@@ -20,4 +20,4 @@ The search bar is located at the top of the song list view, but it is hidden whe
 ###Smooth navigation
 An extra thread is used for fetching the song data so that the main thread for UI will not be intrrupted.
 ###Better looking
-The background of each song's description is an blur image of the single.
+The background of each song's description is an blur image of the song.
