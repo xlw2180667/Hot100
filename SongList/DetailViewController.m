@@ -9,16 +9,16 @@
 #import "DetailViewController.h"
 #import "SonglistTableViewController.h"
 #import "SongListDatabase.h"
-#import <CoreImage/CoreImage.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface DetailViewController () <AVAudioPlayerDelegate> {
+@interface DetailViewController () <AVAudioPlayerDelegate, UIActionSheetDelegate> {
     AVAudioPlayer *player;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, copy) UIVisualEffect *effect;
+- (IBAction)showActionSheet:(id)sender;
 
 @end
 
@@ -79,5 +79,20 @@
     }
 }
 
+#pragma mark - UIAction sheet
 
+//If the user want to buy the song, click download button then jump to iTunes
+- (IBAction)showActionSheet:(id)sender {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Provided courtesy of iTunes" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancle" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Download from iTunes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSURL *url = [NSURL URLWithString:self.trackViewUrl];
+        [[UIApplication sharedApplication] openURL:url];
+    }]];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
 @end

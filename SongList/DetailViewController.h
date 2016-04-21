@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString *bandName;
 @property (nonatomic, strong) NSString *imageName;
 @property (nonatomic, strong) NSString *songPath;
+@property (nonatomic, strong) NSString *trackViewUrl;
 
 @end
